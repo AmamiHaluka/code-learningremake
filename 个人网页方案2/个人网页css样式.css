@@ -8,9 +8,9 @@
 
     float: left;
 
-    width: 721px;
+    width: 770px;
 
-    height: 455px;
+    height: 500px;
 
     /* //隐藏超出部分 */
 
@@ -32,7 +32,7 @@
 
     /* //设置元素堆叠顺序 */
 
-    z-index: -1;
+    /* z-index: -1; */
 
 }
 

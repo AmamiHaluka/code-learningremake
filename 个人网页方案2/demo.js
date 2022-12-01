@@ -1,8 +1,7 @@
-console.log('sdsd')
-function init(){
-    window.addEventListener('load', function () {
 
-//获取元素
+window.addEventListener('load', function () {
+
+    //获取元素
 
     var arrow_l = document.querySelector('.arrow-l');
 
@@ -16,17 +15,17 @@ function init(){
 
     focus.addEventListener('mouseenter', function () {
 
-    arrow_l.style.display = 'block';
+        arrow_l.style.display = 'block';
 
-    arrow_r.style.display = 'block';
+        arrow_r.style.display = 'block';
 
-    clearInterval(timer);
+        clearInterval(timer);
 
         timer = null;
 
     })
 
-//鼠标离开启动定时器
+    //鼠标离开启动定时器
 
     focus.addEventListener('mouseleave', function () {
 
@@ -36,17 +35,17 @@ function init(){
 
         //启动定时器
 
-        timer = setInterval(function() {
+        timer = setInterval(function () {
 
-        //手动调用点击事件
+            //手动调用点击事件
 
-        arrow_r.click();
+            arrow_r.click();
 
         }, 2000);
 
     })
 
-//动态生成小圆圈
+    //动态生成小圆圈
 
     var ul = focus.querySelector('ul');
 
@@ -56,181 +55,255 @@ function init(){
 
     for (var i = 0; i < ul.children.length; i++) {
 
-    var li = document.createElement('li');
+        var li = document.createElement('li');
 
-    ol.appendChild(li);
+        ol.appendChild(li);
 
-    //记录当前小圆圈的索引号，通过自定义属性来做
+        //记录当前小圆圈的索引号，通过自定义属性来做
 
-    li.setAttribute('index', i);
+        li.setAttribute('index', i);
 
-    //排他思想 给li添加点击效果
+        //排他思想 给li添加点击效果
 
 
 
-//小圆点点击事件
+        //小圆点点击事件
 
-    li.addEventListener('click', function () {
+        li.addEventListener('click', function () {
 
-    for (var i = 0; i < ol.children.length; i++) {
+            for (var i = 0; i < ol.children.length; i++) {
 
-        ol.children[i].className = ' ';
+                ol.children[i].className = ' ';
+
+            }
+
+            this.className = 'current';
+
+            //点击圆圈移动图片
+
+            //动画函数使用者必须有定位  算法：小圆圈的索引号*图片大小就是ul的移动距离 注意是负值
+
+            //当点击了某个li 就拿到了当前li的索引号
+
+            var index = this.getAttribute('index');
+
+            //当点击了li， 就要把li的索引号给num 控制图片
+
+            num = index;
+
+            //当点击了li， 就要把li的索引号给circle 控制圆圈
+
+            circle = index;
+
+            //console.log(focus.offsetWidth);
+
+            animate(ul, -index * focusWidth);
+
+        })
 
     }
 
-    this.className = 'current';
+    //让第一个圈添加白底
 
-    //点击圆圈移动图片
+    ol.children[0].className = 'current';
 
-    //动画函数使用者必须有定位  算法：小圆圈的索引号*图片大小就是ul的移动距离 注意是负值
+    //克隆第一张图片，放到最后面 (写到生成小圆圈的外面)
 
-    //当点击了某个li 就拿到了当前li的索引号
+    var first = ul.children[0].cloneNode(true);
 
-    var index = this.getAttribute('index');
+    ul.appendChild(first);
 
-    //当点击了li， 就要把li的索引号给num 控制图片
+    //点击右侧按钮滚动图片
 
-    num = index;
+    var num = 0;
 
-    //当点击了li， 就要把li的索引号给circle 控制圆圈
+    //控制小圆圈播放
 
-    circle = index;
+    var circle = 0;
 
-    //console.log(focus.offsetWidth);
+    //节流阀
 
-    animate(ul, -index * focusWidth);
+    var flag = true;
 
-    })
+    arrow_r.addEventListener('click', function () {
 
-}
+        //如果走到最后一张图片 ，ul快速复原 left改为0 (无缝滚动)
 
-//让第一个圈添加白底
+        if (flag) {
 
-ol.children[0].className = 'current';
+            flag = false; //关闭节流阀
 
-//克隆第一张图片，放到最后面 (写到生成小圆圈的外面)
+            if (num == ul.children.length - 1) {
 
-var first = ul.children[0].cloneNode(true);
+                ul.style.left = 0;
 
-ul.appendChild(first);
+                num = 0;
 
-//点击右侧按钮滚动图片
+            }
 
-var num = 0;
+            num++;
 
-//控制小圆圈播放
+            animate(ul, -num * focusWidth, function () {
 
-var circle = 0;
+                flag = true; //打开节流阀
 
-//节流阀
+            });
 
-var flag = true;
+            circle++;
 
-arrow_r.addEventListener('click', function() {
+            //如果circle长度 = ol.children.length 回到0
 
-//如果走到最后一张图片 ，ul快速复原 left改为0 (无缝滚动)
+            if (circle == ol.children.length) {
 
-if(flag) {
+                circle = 0;
 
-flag = false; //关闭节流阀
+            }
 
-if(num == ul.children.length - 1) {
+            circleChange();
 
-ul.style.left = 0;
+        }
 
-num = 0;
+    });
 
-}
+    //左侧按钮
 
-num++;
+    arrow_l.addEventListener('click', function () {
 
-animate(ul, -num * focusWidth, function(){
+        //如果走到第一张图片 ，ul快速到最后一张 left改为-(ul.children.length - 1) * focusWidth + 'px' (无缝滚动)
 
-flag = true; //打开节流阀
+        if (flag) {
 
-});
+            flag = false; //关闭节流阀
 
-circle++;
+            if (num == 0) {
 
-//如果circle长度 = ol.children.length 回到0
+                num = ul.children.length - 1;
 
-if(circle == ol.children.length) {
+                ul.style.left = -num * focusWidth + 'px';
 
-circle = 0;
+            }
 
-}
+            num--;
 
-circleChange();
+            animate(ul, -num * focusWidth, function () {
 
-}
+                flag = true;  //打开节流阀
 
-});
+            });
 
-//左侧按钮
+            circle--;
 
-arrow_l.addEventListener('click', function() {
+            //如果circle<0 说明到第一张图片了
 
-//如果走到第一张图片 ，ul快速到最后一张 left改为-(ul.children.length - 1) * focusWidth + 'px' (无缝滚动)
+            // if(circle < 0) {
 
-if(flag) {
+            //     circle = ol.children.length - 1;
 
-flag = false; //关闭节流阀
+            // }
 
-if(num == 0) {
+            circle = circle < 0 ? ol.children.length - 1 : circle;
 
-    num = ul.children.length - 1;
+            circleChange();
 
-    ul.style.left = -num* focusWidth + 'px';
+        }
 
-}
+    });
 
-num--;
+    function circleChange() {
 
-animate(ul, -num * focusWidth, function(){
+        for (var i = 0; i < ol.children.length; i++) {
 
-    flag = true;  //打开节流阀
+            ol.children[i].className = '';
 
-});
+        }
 
-circle--;
+        ol.children[circle].className = 'current';
 
-//如果circle<0 说明到第一张图片了
+    }
 
-// if(circle < 0) {
+    //定时器
 
-//     circle = ol.children.length - 1;
+    var timer = setInterval(function () {
 
-// }
+        //手动调用点击事件
 
-circle = circle < 0 ? ol.children.length - 1 : circle;
+        arrow_r.click();
 
-circleChange();
-
-}
-
-});
-
-function circleChange () {
-
-for(var i = 0;i<ol.children.length;i++) {
-
-ol.children[i].className = '';
-
-}
-
-ol.children[circle].className = 'current';
-
-}
-
-//定时器
-
-var timer = setInterval(function() {
-
-//手动调用点击事件
-
-arrow_r.click();
-
-}, 2000);
+    }, 2000);
 
 })
+
+
+function animate(obj, target, callback) {
+
+
+
+    //调用函数就清除一次定时器，避免问题发生
+
+
+
+    clearInterval(obj.timer)
+
+
+
+    //添加定时器
+
+
+
+    obj.timer = setInterval(function () {
+
+
+
+        //步长值写到计时器里面  改为整数(往上取整)
+
+
+
+        var step = (target - obj.offsetLeft) / 10;
+
+
+
+        //整数往大了取，负数往小了取
+
+
+
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+
+
+
+        if (obj.offsetLeft == target) {
+
+
+
+            //如果已经到达指定位置就停止定时器
+
+
+
+            clearInterval(obj.timer);
+
+
+
+            //回调函数写到定时器结束之后
+
+
+
+            callback && callback();
+
+
+
+        }
+
+
+
+        //把每次加一步长值改变为慢慢变小的值
+
+
+
+        obj.style.left = obj.offsetLeft + step + 'px';
+
+
+
+    }, 15);
+
+
+
 }
