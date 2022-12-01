@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="HTMLtraining section1">
+
+
+        <div class="vscode basic">
+            <p>
+                vscode和HTML的特性会集中在本class中描述，目前涉及的特性有：<br>
+                !为快速生成HTML基础架构的快捷字符；<br>
+                ctrl+d可以快速选择单行内的单个字符；<br>
+                ctrl+s是快速保存，防止崩溃丢代码这个动要常做；<br>
+                ctrl+/是直接插入注释；<br>
+            </p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="title">
+            <p>
+                标题标签主要应用于网页抬头，
+               比如文章的标题，或者一些右侧文章链接下使用的标题等，其有1-6共计6个大小，
+               其具备自带加粗的特性
+            </p>
+        </div>
+        <div>
+            <h1>这里是示例标题1</h1>
+        </div>
+        <div class="title note">
+            <p>标题标签的使用，除了有h1-h6的大小区分之外，并没有太多需要注意的地方</p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="pageline">
+            <p>页面分割线主要用于网页文章中分割标题部分以及作者信息或转载信息部分，<br>
+                多用于标题下方，鲜用于正文内。</p>
+        </div>
+        <div>
+            <p>这里是分割线前</p>
+            <hr>
+            <p>这里是分割线后</p>
+        </div>
+        <div class="pageline note">
+            <p>分割线除上述要求外，并没有什么使用上的限制</p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="textarea">
+            <p>自然段标签是二段式标签，由前后各一个p组成，被框起的范围内为一个段</p>
+        </div>
+        <div>
+            <p>这里是演示自然段</p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="deleteline etc">
+            <p>
+                删除线（del及s）和加粗（stronog及b）、斜体（em及i）、下划线（ins及u）；
+                <br>
+                这四种标签用法接近，都多用于正文段落中或电商网站中；
+                <br>
+                正文段落如文章中修正的部分，电商网站中如价格打折等，都会使用上述标签。
+            </p>
+        </div>
+        <div>
+            <p>
+                <b>加粗示例文字1</b><br>
+                <strong>加粗示例文字2</strong><br>
+                <i>倾斜示例文字1</i><br>
+                <em>倾斜示例文字2</em><br>
+                <s>删除示例文字1</s><br>
+                <del>删除示例文字2</del><br>
+                <ins>下划线示例文字1</ins><br>
+                <u>下划线示例文字2</u><br>
+            </p>
+        </div>
+        <div class="deleteline info">
+            <p>
+                以删除线为例的四种标签，这类标签有两种使用方式：<br>
+                两种方法在web页面呈现的效果完全一样,其主要区别在于自己或他人在后续查看代码时，<br>
+                能够确认其重要性，如使用strong而不是b，就说明此处是需要强调的部分，或是特别标记的部分。
+            </p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="分行标签">
+            <p>
+                分行标签多用于自然段内的文本分行，当一段文本内容过长以至于缩放浏览器会自动换行时，<br>
+                换行标签就可以使用
+            </p>
+        </div>
+        <div>
+            <p>
+                分行自然段第一行；
+                <br>
+                分行自然段第二行。
+            </p>
+        </div>
+        <div class="分行标签要点">
+            <p>
+                我目前感觉分行标签没太多需要特别注意的地方。
+            </p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="图片标签">
+            <p>
+               图片标签就是在网页中插入图片或gif动图的标签，<br>
+               称为img，其内含多种定义标签可以指定图片的大小及宽度，其中包括但不限于：<br>
+               src标签：负责选中图片，输入图片文件的位置目录；<br>
+               alt标签：负责图片加载失败时显示的文本内容，指示用户当前图片加载失败；<br>
+               title标签：负责光标悬停到图片上时，光标旁显示出的文本内容；<br>
+               width标签和height标签：各自负责管理图片的宽度和高度；<br>
+            </p>
+        </div>
+        <div>
+            <img src="./doge.gif" alt="图片加载失败" title="这只是狗" width="800" height="600">
+        </div>
+        <div class="图片标签要点">
+            <p>
+                在我目前学到的图片标签相关内容中，易错的只有width标签和height标签，<br>
+                这两者分开使用并没有什么问题，html会直接根据用户自己定义的width或height来自主缩放，<br>
+                但如果一同使用，html就会严格按照用户输入的高度及宽度显示图片/动图/媒体，<br>
+                <strong> 若比例不对则会严重形变，这点需要注意。</strong>
+            </p>
+        </div>
+
+        <br><hr><br>
+        
+    </div>
+</body>
+</html>

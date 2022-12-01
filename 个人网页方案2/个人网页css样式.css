@@ -1,0 +1,119 @@
+/* 轮播图 */
+
+/* //轮播图父盒子样式 */
+
+.focus {
+
+    position: relative;
+
+    float: left;
+
+    width: 721px;
+
+    height: 455px;
+
+    /* //隐藏超出部分 */
+
+    overflow: hidden;
+
+}
+
+/* //轮播图盒子样式 */
+
+.focus ul {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 600%;
+
+    /* //设置元素堆叠顺序 */
+
+    z-index: -1;
+
+}
+
+/* //图片样式 */
+
+.focus ul li {
+
+    float: left;
+
+}
+
+/* //按钮样式 */
+
+.arrow-l,
+
+.arrow-r {
+
+    position: absolute;
+
+    /* 居中 */
+
+    top: 50%;
+
+    margin-top: -20px;
+
+    width: 24px;
+
+    height: 40px;
+
+    background: rgba(0, 0, 0, .3);
+
+    text-align: center;
+
+    line-height: 40px;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    /* //先隐藏样式，鼠标经过再显示 */
+
+    display: none;
+
+}
+
+.arrow-r {
+
+    right: 0;
+
+}
+
+/* //小圆圈父盒子样式 */
+
+.circle {
+
+    position: absolute;
+
+    bottom: 10px;
+
+    left: 50px; 
+
+}
+
+/* //小圆圈样式 */
+
+.circle li {
+
+    width: 10px;
+
+    height: 10px;
+
+    float: left;
+
+    /* //边框样式 */
+
+    border: 2px solid rgba(255, 255, 255, .5);
+
+    margin: 0 5px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+}
